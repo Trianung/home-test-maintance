@@ -14,7 +14,7 @@
             :to="`/requests/${request.id}/edit`"
             class="btn btn-secondary btn-sm"
           >
-            ✏️ Edit
+            <Icon name="lucide:pencil" size="1em" /> Edit
           </NuxtLink>
 
           <!-- Approve: supervisor + admin only -->
@@ -23,7 +23,7 @@
             class="btn btn-success btn-sm"
             @click="showApprove = true"
           >
-            ✅ Approve
+            <Icon name="lucide:check-circle" size="1em" /> Approve
           </button>
 
           <!-- Reject: supervisor + admin only -->
@@ -32,7 +32,7 @@
             class="btn btn-warning btn-sm"
             @click="showReject = true"
           >
-            ❌ Reject
+            <Icon name="lucide:x-circle" size="1em" /> Reject
           </button>
 
           <!-- Delete: admin only -->
@@ -41,7 +41,7 @@
             class="btn btn-danger btn-sm"
             @click="showDelete = true"
           >
-            🗑️ Delete
+            <Icon name="lucide:trash-2" size="1em" /> Delete
           </button>
         </div>
       </div>

@@ -39,13 +39,13 @@
           <h2 class="card-title">Quick Actions</h2>
         </div>
         <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap">
-          <NuxtLink to="/requests/create" class="btn btn-primary">➕ New Request</NuxtLink>
-          <NuxtLink to="/requests" class="btn btn-secondary">📋 {{ role === 'operator' ? 'My Requests' : 'All Requests' }}</NuxtLink>
+          <NuxtLink to="/requests/create" class="btn btn-primary"><Icon name="lucide:plus-circle" size="1.1em" /> New Request</NuxtLink>
+          <NuxtLink to="/requests" class="btn btn-secondary"><Icon name="lucide:clipboard-list" size="1.1em" /> {{ role === 'operator' ? 'My Requests' : 'All Requests' }}</NuxtLink>
           <template v-if="role === 'supervisor' || role === 'admin'">
-            <NuxtLink to="/requests?status=SUBMITTED" class="btn btn-warning">⏳ Pending Review</NuxtLink>
+            <NuxtLink to="/requests?status=SUBMITTED" class="btn btn-warning"><Icon name="lucide:clock" size="1.1em" /> Pending Review</NuxtLink>
           </template>
           <template v-if="role === 'admin'">
-            <NuxtLink to="/users" class="btn btn-secondary">👥 Manage Users</NuxtLink>
+            <NuxtLink to="/users" class="btn btn-secondary"><Icon name="lucide:users" size="1.1em" /> Manage Users</NuxtLink>
           </template>
         </div>
       </div>

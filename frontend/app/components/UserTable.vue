@@ -25,13 +25,13 @@
           </td>
           <td>{{ formatDate(u.createdAt) }}</td>
           <td style="display: flex; gap: 4px;">
-            <button class="btn btn-secondary btn-sm" @click="$emit('edit', u)">✏️ Edit</button>
+            <button class="btn btn-secondary btn-sm" @click="$emit('edit', u)"><Icon name="lucide:pencil" size="1em" /> Edit</button>
             <button
               v-if="u.isActive"
               class="btn btn-warning btn-sm"
               @click="$emit('deactivate', u)"
             >
-              Deactivate
+              <Icon name="lucide:user-x" size="1em" /> Deactivate
             </button>
           </td>
         </tr>

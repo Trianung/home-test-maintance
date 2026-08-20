@@ -1,10 +1,10 @@
 <template>
   <aside class="sidebar" :class="{ open: mobileOpen }">
     <nav class="sidebar-nav">
-      <NuxtLink to="/dashboard" class="nav-item" @click="$emit('close')">📊 Dashboard</NuxtLink>
-      <NuxtLink to="/requests" class="nav-item" @click="$emit('close')">📋 Requests</NuxtLink>
-      <NuxtLink to="/requests/create" class="nav-item" @click="$emit('close')">➕ New Request</NuxtLink>
-      <NuxtLink v-if="role === 'admin'" to="/users" class="nav-item" @click="$emit('close')">👥 Users</NuxtLink>
+      <NuxtLink to="/dashboard" class="nav-item" @click="$emit('close')"><Icon name="lucide:layout-dashboard" size="1.2em" /> Dashboard</NuxtLink>
+      <NuxtLink to="/requests" class="nav-item" @click="$emit('close')"><Icon name="lucide:clipboard-list" size="1.2em" /> Requests</NuxtLink>
+      <NuxtLink to="/requests/create" class="nav-item" @click="$emit('close')"><Icon name="lucide:plus-circle" size="1.2em" /> New Request</NuxtLink>
+      <NuxtLink v-if="role === 'admin'" to="/users" class="nav-item" @click="$emit('close')"><Icon name="lucide:users" size="1.2em" /> Users</NuxtLink>
     </nav>
   </aside>
 </template>

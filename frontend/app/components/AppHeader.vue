@@ -1,12 +1,16 @@
 <template>
   <header class="app-header">
     <div class="header-left">
-      <button class="sidebar-toggle" @click="$emit('toggle-sidebar')">☰</button>
+      <button class="sidebar-toggle" @click="$emit('toggle-sidebar')">
+        <Icon name="lucide:menu" size="1.2em" />
+      </button>
       <span class="header-title">Maintenance Log</span>
     </div>
     <div class="header-right">
       <span class="header-user">{{ user?.name }} ({{ user?.role }})</span>
-      <button class="btn btn-secondary btn-sm" @click="logout">Logout</button>
+      <button class="btn btn-secondary btn-sm" @click="logout">
+        <Icon name="lucide:log-out" size="1em" /> Logout
+      </button>
     </div>
   </header>
 </template>

@@ -2,7 +2,7 @@
   <div>
     <div class="page-header">
       <h1 class="page-title">User Management</h1>
-      <button class="btn btn-primary" @click="openCreate">➕ Create User</button>
+      <button class="btn btn-primary" @click="openCreate"><Icon name="lucide:user-plus" size="1.1em" /> Create User</button>
     </div>
 
     <div v-if="successMsg" class="alert alert-success">{{ successMsg }}</div>

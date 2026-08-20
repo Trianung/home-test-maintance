@@ -2,7 +2,7 @@
   <div>
     <div class="page-header">
       <h1 class="page-title">{{ role === 'operator' ? 'My Requests' : 'All Requests' }}</h1>
-      <NuxtLink to="/requests/create" class="btn btn-primary">➕ New Request</NuxtLink>
+      <NuxtLink to="/requests/create" class="btn btn-primary"><Icon name="lucide:plus-circle" size="1.1em" /> New Request</NuxtLink>
     </div>
 
     <RequestFilter
