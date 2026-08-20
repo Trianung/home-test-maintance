@@ -41,7 +41,7 @@ async function seed() {
       role: users.role,
     })
 
-  console.log('✅ Users created:')
+  console.log(' Users created:')
   console.table(insertedUsers)
 
   // Get user IDs
@@ -89,15 +89,15 @@ async function seed() {
     ])
     .returning()
 
-  console.log('✅ Maintenance requests created:')
+  console.log('Maintenance requests created:')
   console.table(insertedRequests)
 
-  console.log('🌱 Seed completed successfully!')
+  console.log('Seed completed successfully!')
 }
 
 seed()
   .catch((error) => {
-    console.error('❌ Seed failed:')
+    console.error('Seed failed:')
     console.error(error)
     process.exit(1)
   })

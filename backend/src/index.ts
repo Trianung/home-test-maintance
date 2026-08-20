@@ -1,6 +1,8 @@
 import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
-
+import auth from './routes/auth'
+import requests from './routes/requests'
+import userRoutes from './routes/users'
 const app = new Hono()
 
 app.get('/', (c) => {
@@ -8,6 +10,10 @@ app.get('/', (c) => {
         message: 'Maintenance Request API is running'
     })
 })
+
+app.route('/api/auth', auth)
+app.route('/api/requests', requests)
+app.route('/api/users', userRoutes)
 
 serve({
     fetch: app.fetch,
