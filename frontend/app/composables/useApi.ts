@@ -2,6 +2,12 @@ export function useApi() {
   const config = useRuntimeConfig()
   const token = useCookie('auth_token')
 
+  // Gunakan apiBaseServer saat di server-side (SSR dalam Docker),
+  // gunakan apiBase saat di client-side (browser)
+  const baseUrl = import.meta.server
+    ? (config.apiBaseServer as string) || config.public.apiBase
+    : config.public.apiBase
+
   async function apiFetch<T>(
     endpoint: string,
     options: {
@@ -16,7 +22,7 @@ export function useApi() {
       headers['Authorization'] = `Bearer ${token.value}`
     }
 
-    return await $fetch<T>(`${config.public.apiBase}${endpoint}`, {
+    return await $fetch<T>(`${baseUrl}${endpoint}`, {
       method: (options.method || 'GET') as any,
       headers,
       body: options.body ? options.body : undefined,

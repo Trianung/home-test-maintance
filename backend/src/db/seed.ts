@@ -2,9 +2,23 @@ import 'dotenv/config'
 import { db } from './index'
 import { users, maintenanceRequests } from './schema'
 import { hash } from 'bcryptjs'
+import { eq } from 'drizzle-orm'
 
 async function seed() {
   console.log('🌱 Starting database seed...')
+
+  // === IDEMPOTENT CHECK ===
+  // Cek apakah seed sudah pernah dijalankan (cek admin user)
+  const existingAdmin = await db
+    .select({ id: users.id })
+    .from(users)
+    .where(eq(users.email, 'admin@example.com'))
+    .limit(1)
+
+  if (existingAdmin.length > 0) {
+    console.log('✅ Seed already ran — skipping to prevent duplicate data.')
+    return
+  }
 
   // Hash passwords
   const adminPassword = await hash('Admin123!', 10)
@@ -41,7 +55,7 @@ async function seed() {
       role: users.role,
     })
 
-  console.log(' Users created:')
+  console.log('✅ Users created:')
   console.table(insertedUsers)
 
   // Get user IDs
@@ -89,15 +103,15 @@ async function seed() {
     ])
     .returning()
 
-  console.log('Maintenance requests created:')
+  console.log('✅ Maintenance requests created:')
   console.table(insertedRequests)
 
-  console.log('Seed completed successfully!')
+  console.log('🎉 Seed completed successfully!')
 }
 
 seed()
   .catch((error) => {
-    console.error('Seed failed:')
+    console.error('❌ Seed failed:')
     console.error(error)
     process.exit(1)
   })
