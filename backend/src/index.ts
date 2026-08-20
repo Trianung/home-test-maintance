@@ -1,9 +1,15 @@
 import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
+import { cors } from 'hono/cors'
 import auth from './routes/auth'
 import requests from './routes/requests'
 import userRoutes from './routes/users'
 const app = new Hono()
+
+app.use('/*', cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}))
 
 app.get('/', (c) => {
     return c.json({
