@@ -319,6 +319,10 @@ requests.delete('/:id', authMiddleware, async (c) => {
       }
     }
 
+    if (user.role === 'supervisor') {
+      return c.json({ message: 'Forbidden: supervisors cannot delete requests' }, 403)
+    }
+
     await db.delete(maintenanceRequests).where(eq(maintenanceRequests.id, id))
 
     return c.json({ message: 'Maintenance request deleted successfully' })
