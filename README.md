@@ -92,16 +92,20 @@ Kami telah menyertakan sebuah `Jenkinsfile` (Declarative Pipeline) di root repos
 
 Saya menggunakan AI Coding Assistant dalam mengerjakan evaluasi tes ini. Berikut adalah rincian lengkap penggunaannya:
 
-* **Tools yang digunakan:** Google Gemini (Antigravity IDE / Agentic AI).
-* **Bagian kode yang dibantu:**
-  - Setup environment otomatisasi dan kerangka testing menggunakan Vitest (`vitest.config.ts`, file setup).
-  - Penulisan skrip pipeline (`Jenkinsfile`).
-  - Pembuatan *middleware* untuk Structured Logging dan Endpoint Health Check.
-* **Alasan penggunaan AI:** Saya menggunakan AI untuk menulis kode yang sifatnya _boilerplate_ dan rutin (seperti konfigurasi pipeline, *setup dependencies* testing, dan logger). Ini menghemat waktu sehingga saya bisa berfokus penuh merancang arsitektur monorepo, logika autentikasi, serta memastikan aturan logika RBAC (Core Requirements) aman dari eksploitasi API.
-* **Kasus di mana saya menolak/merevisi kode dari AI:** 
-  Ketika AI membuat *unit tests* untuk operasi penghapusan data (_delete request_) oleh **Supervisor**, AI membuat *test expectation* kosong yang seolah-olah sukses. Padahal berdasarkan spesifikasi aturan bisnis (Permission Matrix), Supervisor tidak boleh (_No_) melakukan hapus data (seharusnya merespon kode status 403 Forbidden). Saya menolak kode awal dari AI tersebut, menulis ulang blok ekspektasi *test* yang benar, dan secara manual menyisipkan logika _blocker_ `if (user.role === 'supervisor') { return 403 }` di rute `requests.ts` agar matriks yang diminta spesifikasi terpenuhi seratus persen.
+Dalam pengerjaan home test ini, saya menggunakan **AI Coding Assistant sebagai supporting tool** untuk membantu proses pengembangan aplikasi. AI digunakan sebagai pendamping dalam melakukan brainstorming, mengeksplorasi alternatif solusi, berdiskusi mengenai arsitektur dan pendekatan implementasi, serta membantu proses problem solving dan debugging ketika terdapat kendala teknis selama pengerjaan.
+
+**ChatGPT** digunakan terutama sebagai *technical discussion partner* untuk membantu brainstorming, mengevaluasi alternatif arsitektur, mendiskusikan pendekatan authentication, authorization, RBAC, Dockerization, automated testing, serta membantu menganalisis dan memecahkan masalah teknis yang ditemukan selama proses pengembangan. ChatGPT juga digunakan untuk membantu melakukan review terhadap pendekatan implementasi sebelum dilakukan validasi lebih lanjut.
+
+Sementara itu, **Google Gemini** digunakan sebagai coding assistant yang membantu proses implementasi dan pekerjaan yang bersifat boilerplate, konfigurasi environment, automated testing, Jenkins pipeline, middleware, structured logging, health check, serta membantu proses debugging dan *error solving* secara langsung selama pengembangan.
+
+Penggunaan AI dalam proses ini tidak menggantikan proses analisis dan pengambilan keputusan teknis. Setiap saran, kode, maupun solusi yang dihasilkan oleh AI tetap diperiksa, disesuaikan, dan divalidasi secara manual berdasarkan requirement home test, business logic, security consideration, permission matrix, serta hasil pengujian aplikasi. Keputusan akhir mengenai arsitektur, implementasi, dan validasi sistem tetap dilakukan secara manual oleh developer.
+
+AI digunakan sebagai alat bantu untuk meningkatkan efisiensi proses development, sementara pemahaman terhadap requirement, implementasi final, pengujian, dan tanggung jawab terhadap hasil akhir aplikasi tetap berada pada developer.
 
 ---
 **Catatan & Keterbatasan (Known Limitations):**
-- Karena fokus penilaian pada kehandalan infrastruktur dan spesifikasi *backend*, antarmuka (UI) frontend mungkin dibuat ringkas tanpa desain *custom* berlebihan.
-- Docker environment dirancang untuk kemudahan *local testing*. Untuk deployment asli, konfigurasi *network*, SSL, dan *secret rotation* perlu ditambahkan.
+Implementasi aplikasi ini difokuskan pada pemenuhan requirement utama home test, reliability backend, RBAC, automated testing, serta reproducible local environment menggunakan Docker. Oleh karena itu, beberapa aspek yang umumnya diperlukan untuk production deployment belum menjadi bagian dari scope pengerjaan, seperti konfigurasi SSL/TLS, secret rotation, reverse proxy, production-grade monitoring, dan container security hardening.
+
+Frontend juga dibuat dengan fokus pada kebutuhan fungsional dan integrasi dengan backend, sehingga tidak ditujukan sebagai implementasi UI/UX production-grade.
+
+Jenkinsfile disediakan untuk menggambarkan rancangan proses CI/CD dan dapat dibaca serta dievaluasi oleh reviewer, namun pipeline tidak dijalankan pada Jenkins server selama pengerjaan home test.
